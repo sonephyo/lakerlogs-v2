@@ -3,6 +3,7 @@ import { createClient } from "./client";
 import { env } from "next-runtime-env";
 import { getDefaultStore } from "jotai";
 import { tokenAtom } from "../../context/state";
+import { isDemoSession, notifyDemoChange } from "@/lib/demo/store";
 
 export async function googleSignIn(credential: string, role?: string) {
   const AUTH_URL = env("NEXT_PUBLIC_AUTH_API_URL") || "http://localhost:9084/auth/api";
@@ -31,6 +32,7 @@ export async function getUsersFromClass(classID : string) {
 }
 
 export async function logout() {
+  if (isDemoSession()) return;
   const AUTH_URL = env("NEXT_PUBLIC_AUTH_API_URL") || "http://localhost:9084/auth/api";
   try {
     await axios.post(`${AUTH_URL}/auth/logout`, {}, { withCredentials: true });
@@ -74,6 +76,10 @@ export async function updateUserStanding(email: string, classStanding: string) {
 }
 
 export async function refreshToken() {
+  if (isDemoSession()) {
+    notifyDemoChange();
+    return "";
+  }
   const AUTH_URL =
     env("NEXT_PUBLIC_AUTH_API_URL") || "http://localhost:9084/auth/api";
   const res = await axios.post(

@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter } from "@/lib/app-navigation";
 import { useQuery } from "@tanstack/react-query";
 import { useAtomValue } from "jotai";
 import { isInstructorRole, userAtom } from "@/components/custom/utils/context/state";

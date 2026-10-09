@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function proxy(request: NextRequest) {
+  if (request.nextUrl.pathname === "/demo" || request.nextUrl.pathname.startsWith("/demo/")) {
+    return NextResponse.next();
+  }
   const token = request.cookies.get("token")?.value;
   const isAuthPage = request.nextUrl.pathname.startsWith("/signup");
 

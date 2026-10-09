@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { userAtom } from "@/components/custom/utils/context/state";
 import { worklogEditAtom } from "@/components/custom/utils/context/state";
 import { fmtDateTime } from "../../utils/func/formatDate";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/app-navigation";
 import {
   CheckCircle2,
   XCircle,

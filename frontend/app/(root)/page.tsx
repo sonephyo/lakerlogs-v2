@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowRight, ArrowUpRight, ClipboardList, GitBranch, Layers3, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ClipboardList, GitBranch, Layers3, ShieldCheck, Users } from "lucide-react";
 import { ProductPreview } from "@/components/custom/screen/landing/ProductPreview";
 
 export const metadata: Metadata = {
@@ -41,10 +41,11 @@ export default function LandingPage() {
             <h1 className="max-w-xl text-5xl font-semibold leading-[1.06] tracking-[-0.055em] sm:text-6xl xl:text-7xl">Track your work.<br /><span className="text-[#6c8065]">Review your progress.</span></h1>
             <p className="mt-7 max-w-md text-lg leading-8 text-[#536251]">Students document tasks, goals, and reflections in weekly work logs. Instructors track submissions and review progress.</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#experience" className={`${linkStyle} bg-[#1E4B35] text-white hover:bg-[#163b29]`}>View preview <ArrowDown size={16} aria-hidden="true" /></a>
+              <Link href="/demo?role=student" className={`${linkStyle} bg-[#1E4B35] text-white hover:bg-[#163b29]`}>Try student demo <ArrowRight size={16} aria-hidden="true" /></Link>
+              <Link href="/demo?role=instructor" className={`${linkStyle} border border-[#1E4B35]/20 hover:bg-white`}>Try instructor demo <ArrowRight size={16} aria-hidden="true" /></Link>
               <a href={repository} target="_blank" rel="noreferrer" className={`${linkStyle} border border-[#1E4B35]/20 hover:bg-white`}>View source <ArrowUpRight size={16} aria-hidden="true" /></a>
             </div>
-            <p className="mt-5 text-xs text-[#536251]">Explore this project without an account. Course access requires sign-in.</p>
+            <p className="mt-5 text-xs text-[#536251]">No account needed for the demo. Changes stay in your browser.</p>
           </div>
           <div id="experience" className="scroll-mt-8"><ProductPreview /></div>
         </section>

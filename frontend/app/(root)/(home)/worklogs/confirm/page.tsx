@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/app-navigation";
 import { useAtomValue } from "jotai";
 import { useMutation } from "@tanstack/react-query";
 

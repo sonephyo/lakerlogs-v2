@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "@/lib/app-navigation";
 import { useQuery } from "@tanstack/react-query";
 import { useAtomValue } from "jotai";
 import { userAtom } from "@/components/custom/utils/context/state";

@@ -1,8 +1,14 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { workLogPostType } from "@/types/worklog/worklogTypes";
+import type { DemoUser } from "@/lib/demo/data";
+
+// A demo-specific Jotai provider supplies this identity without reading real tokens.
+export const demoUserAtom = atom<DemoUser | null>(null);
 
 export const userAtom = atom((get) => {
+  const demoUser = get(demoUserAtom);
+  if (demoUser) return demoUser;
   const token = get(tokenAtom);
   if (!token) return null;
   try {

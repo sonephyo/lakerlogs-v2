@@ -25,7 +25,7 @@ export function ProductPreview() {
           </div>
         </div>
       </div>
-      <p className="px-3 pb-2 pt-4 text-[10px] leading-5 text-[#6c8065]">Illustrative preview with fictional data. Switch perspectives to explore; editing and submissions are available in the course app.</p>
+      <p className="px-3 pb-2 pt-4 text-[10px] leading-5 text-[#6c8065]">Sample preview. Open the demo to edit work logs, submit, and review using the full application screens.</p>
     </section>
   );
 }

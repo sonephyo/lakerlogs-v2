@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:demo": "node --test scripts/demo.test.cjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

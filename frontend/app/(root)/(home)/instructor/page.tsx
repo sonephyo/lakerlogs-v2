@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import Link from "@/lib/app-navigation";
+import { useRouter } from "@/lib/app-navigation";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   getWorklogsForClass,

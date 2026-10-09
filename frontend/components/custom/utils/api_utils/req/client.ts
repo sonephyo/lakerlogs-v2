@@ -2,6 +2,8 @@ import axios from "axios";
 import { getDefaultStore } from "jotai";
 import { tokenAtom } from "../../context/state";
 import { env } from "next-runtime-env";
+import { isDemoSession } from "@/lib/demo/store";
+import { createDemoAdapter } from "@/lib/demo/adapter";
 
 const store = getDefaultStore();
 
@@ -19,10 +21,18 @@ function processQueue(error: any, token: string | null) {
   refreshQueue = [];
 }
 
-export function createClient(baseURL: string) {
+export function createClient(baseURL: string, service: "auth" | "worklog" = "auth") {
   const client = axios.create({ baseURL, withCredentials: true });
+  const demoRequests = new WeakSet<object>();
 
   client.interceptors.request.use((config) => {
+    if (isDemoSession()) {
+      demoRequests.add(config);
+      config.adapter = createDemoAdapter(service);
+      config.headers.delete("Authorization");
+      config.withCredentials = false;
+      return config;
+    }
     var token = localStorage.getItem("csc_480_token");
 
     if (token) {
@@ -36,6 +46,7 @@ export function createClient(baseURL: string) {
   client.interceptors.response.use(
     (response) => response,
     async (error) => {
+      if (isDemoSession() || (error.config && demoRequests.has(error.config))) return Promise.reject(error);
       const originalRequest = error.config;
 
       if (

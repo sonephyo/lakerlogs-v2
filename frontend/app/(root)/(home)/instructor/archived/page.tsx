@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import Link from "@/lib/app-navigation";
 import { useAtomValue } from "jotai";
 import { isInstructorRole, userAtom } from "@/components/custom/utils/context/state";
 import { useEffect, useMemo, useState } from "react";

@@ -1,7 +1,7 @@
 "use client";
 import { NotifCenter } from "@/components/custom/screen/home/NotifCenter";
 import Welcome from "@/components/custom/screen/home/Welcome";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/app-navigation";
 import { useAtomValue } from "jotai";
 import { isInstructorRole, userAtom } from "@/components/custom/utils/context/state";
 import { refreshToken } from "@/components/custom/utils/api_utils/req/req";

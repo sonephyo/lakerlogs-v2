@@ -10,7 +10,7 @@ import {
 import { getClass } from "@/components/custom/utils/api_utils/req/class";
 import { useQuery } from "@tanstack/react-query";
 import { CalendarDays } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/app-navigation";
 
 const FALLBACK_SEMESTER_START = new Date("2026-01-26T00:00:00");
 const FALLBACK_TOTAL_WEEKS = 16;

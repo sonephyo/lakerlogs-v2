@@ -6,7 +6,7 @@ import { getClass } from "@/components/custom/utils/api_utils/req/class";
 import { useAtomValue } from "jotai";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import Link from "@/lib/app-navigation";
 import { userAtom } from "@/components/custom/utils/context/state";
 import { AlertTriangle, CheckCircle2, Clock } from "lucide-react";
 

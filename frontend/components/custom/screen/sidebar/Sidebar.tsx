@@ -20,18 +20,21 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "@/lib/app-navigation";
 import { useAtomValue, useSetAtom } from "jotai";
 import {
   isInstructorRole,
+  demoUserAtom,
   tokenAtom,
   userAtom,
 } from "@/components/custom/utils/context/state";
 import { logout } from "@/components/custom/utils/api_utils/req/req";
 import { DevRoleSwitcher } from "./DevRoleSwitcher";
+import Link from "@/lib/app-navigation";
 
 export function AppSidebar() {
   const userInfo = useAtomValue(userAtom);
+  const demoUser = useAtomValue(demoUserAtom);
   var items = [{ title: "Home", url: "/home", icon: Home }];
   let profileItem: { title: string; url: string; icon: typeof UserIcon } | null =
     null;
@@ -65,6 +68,10 @@ export function AppSidebar() {
   const setToken = useSetAtom(tokenAtom);
 
   const handleLogout = async () => {
+    if (demoUser) {
+      window.location.assign("/");
+      return;
+    }
     await logout();
     setToken(null);
     localStorage.removeItem("csc_480_token");
@@ -127,10 +134,10 @@ export function AppSidebar() {
                     asChild
                     className={`hover:bg-white/10 ${pathname === item.url ? "bg-amber-400 text-[#1E4B35] hover:bg-amber-400" : ""}`}
                   >
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span className="text-lg">{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -148,10 +155,10 @@ export function AppSidebar() {
                     asChild
                     className={`hover:bg-white/10 ${pathname === profileItem.url ? "bg-amber-400 text-[#1E4B35] hover:bg-amber-400" : ""}`}
                   >
-                    <a href={profileItem.url}>
+                    <Link href={profileItem.url}>
                       <profileItem.icon />
                       <span className="text-lg">{profileItem.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               )}
@@ -162,7 +169,7 @@ export function AppSidebar() {
                   onClick={handleLogout}
                 >
                   <LogOutIcon />
-                  <span className="text-lg">Logout</span>
+                  <span className="text-lg">{demoUser ? "Exit demo" : "Logout"}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>

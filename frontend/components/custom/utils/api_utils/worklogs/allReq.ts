@@ -4,7 +4,7 @@ import { env } from "next-runtime-env";
 
 const WORKLOG_API_URL = env("NEXT_PUBLIC_WORKLOGS_API_URL") || "http://localhost:9081/worklog/api";
 
-const client = createClient(WORKLOG_API_URL);
+const client = createClient(WORKLOG_API_URL, "worklog");
 
 export async function submitWorkLog(data: workLogPostType) {
   const res = await client.post(`${WORKLOG_API_URL}`, data);

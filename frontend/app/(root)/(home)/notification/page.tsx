@@ -8,7 +8,7 @@ import { isInstructorRole, userAtom } from "@/components/custom/utils/context/st
 import { fmtDateTime } from "@/components/custom/utils/func/formatDate";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/app-navigation";
 import { CheckCircle2, AlertTriangle, CalendarDays } from "lucide-react";
 
 const FALLBACK_SEMESTER_START = new Date("2026-01-26T00:00:00");

@@ -5,20 +5,21 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useAtomValue } from "jotai";
 import { env } from "next-runtime-env";
-import { userAtom } from "@/components/custom/utils/context/state";
+import { demoUserAtom, userAtom } from "@/components/custom/utils/context/state";
 
 const roles = ["student", "instructor", "co-instructor"] as const;
 type Role = (typeof roles)[number];
 
 export function DevRoleSwitcher() {
   const user = useAtomValue(userAtom);
+  const demoUser = useAtomValue(demoUserAtom);
   const [selection, setSelection] = useState<Role | "">("");
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
   const authUrl = env("NEXT_PUBLIC_AUTH_API_URL") || "http://localhost:9084/auth/api";
   const { data } = useQuery({
     queryKey: ["dev-role-switch", user?.email],
-    enabled: process.env.NODE_ENV === "development" && !!user,
+    enabled: process.env.NODE_ENV === "development" && !!user && !demoUser,
     retry: false,
     refetchOnWindowFocus: false,
     queryFn: async () => {
@@ -29,7 +30,7 @@ export function DevRoleSwitcher() {
     },
   });
 
-  if (process.env.NODE_ENV !== "development" || !user || !data) return null;
+  if (process.env.NODE_ENV !== "development" || !user || !data || demoUser) return null;
   const selectedRole = selection || data.role;
 
   async function switchRole() {

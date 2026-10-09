@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/app-navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
@@ -12,7 +12,7 @@ import {
   deleteWorklog,
 } from "../../utils/api_utils/worklogs/allReq";
 import { getUsersFromClass } from "../../utils/api_utils/req/req";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from "@/lib/app-navigation";
 
 import {
   workLogPostType,
