@@ -17,6 +17,10 @@ import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class AuthService {
+        public Document changeDevelopmentRole(String email, String role) {
+            return repo.updateDevelopmentRole(email, role);
+        }
+
         @Inject
         private AuthRepository repo;
 

@@ -1,20 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/custom/screen/sidebar/Sidebar";
 import RouteGuard from "@/components/custom/utils/RouteGuard";
 import { Toaster } from "sonner";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "LakerLogs",
@@ -27,11 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <>
         <SidebarProvider>
           <div className="flex w-full min-h-screen h-screen">
             <AppSidebar />
@@ -43,7 +28,6 @@ export default function RootLayout({
           </div>
           <Toaster position="top-right" richColors />
         </SidebarProvider>
-      </body>
-    </html>
+    </>
   );
 }

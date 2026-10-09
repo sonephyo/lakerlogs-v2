@@ -28,10 +28,11 @@ import {
   userAtom,
 } from "@/components/custom/utils/context/state";
 import { logout } from "@/components/custom/utils/api_utils/req/req";
+import { DevRoleSwitcher } from "./DevRoleSwitcher";
 
 export function AppSidebar() {
   const userInfo = useAtomValue(userAtom);
-  var items = [{ title: "Home", url: "/", icon: Home }];
+  var items = [{ title: "Home", url: "/home", icon: Home }];
   let profileItem: { title: string; url: string; icon: typeof UserIcon } | null =
     null;
   if (userInfo && userInfo.role == "student" && userInfo.classID) {
@@ -40,11 +41,11 @@ export function AppSidebar() {
     );
     items = hasRealTeam
       ? [
-          { title: "Home", url: "/", icon: Home },
+          { title: "Home", url: "/home", icon: Home },
           { title: "Notification", url: "/notification", icon: Workflow },
           { title: "Weekly Work Logs", url: "/notifications", icon: BellIcon },
         ]
-      : [{ title: "Home", url: "/", icon: Home }];
+      : [{ title: "Home", url: "/home", icon: Home }];
     profileItem = { title: "Profile", url: "/profile", icon: UserIcon };
   }
   if (userInfo && isInstructorRole(userInfo.role)) {
@@ -139,6 +140,7 @@ export function AppSidebar() {
 
         <SidebarGroup className="mt-auto">
           <SidebarGroupContent>
+            <DevRoleSwitcher />
             <SidebarMenu>
               {profileItem && (
                 <SidebarMenuItem className="mt-2">

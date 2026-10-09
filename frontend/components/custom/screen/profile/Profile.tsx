@@ -188,7 +188,7 @@ export function Profile() {
       });
       if (team.length > 0) setSentinelValue(null);
       setStatus({ kind: "success" });
-      router.push("/");
+      router.push("/home");
     } catch (err: any) {
       setStatus({
         kind: "error",

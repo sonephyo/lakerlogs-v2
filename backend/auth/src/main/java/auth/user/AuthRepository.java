@@ -193,6 +193,30 @@ public class AuthRepository{
         return collection.find(new Document("teams", teams)).into(new ArrayList<>());
     }
 
+    /** Keep the exact requested development role, including accounts without a class. */
+    public Document updateDevelopmentRole(String email, String role) {
+        if (!List.of("student", "instructor", "co-instructor").contains(role)) {
+            throw new IllegalArgumentException("Invalid development role");
+        }
+        Document user = findByEmail(email);
+        if (user == null) throw new SecurityException("Account no longer exists.");
+
+        String classID = user.getString("classID");
+        if (classID != null && !classID.isBlank()) {
+            MongoCollection<Document> classData = mongoClient.getDatabase(classID)
+                .getCollection("classData");
+            classData.updateOne(new Document("classID", classID).append("students.email", email),
+                new Document("$set", new Document("students.$.role", role)));
+            String operation = "student".equals(role) ? "$pull" : "$addToSet";
+            classData.updateOne(new Document("classID", classID),
+                new Document(operation, new Document("instructors", email)));
+        }
+        collection.updateOne(new Document("email", email),
+            new Document("$set", new Document("role", role)));
+        user.put("role", role);
+        return user;
+    }
+
     public Document updateUserRole(String email, String newRole){
         
              Document user = findByEmail(email);

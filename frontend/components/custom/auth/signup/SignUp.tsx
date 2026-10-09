@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Script from "next/script";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useMutation } from "@tanstack/react-query";
@@ -42,8 +43,7 @@ export default function SignUp() {
     onSuccess: (data) => {
       setToken(data.token);
       document.cookie = `token=${data.token}; path=/;`;
-      if (isInstructorRole(userInfo?.role)) router.push("/instructor");
-      router.push("/");
+      router.push(isInstructorRole(userInfo?.role) ? "/instructor" : "/home");
     },
   });
 
@@ -69,6 +69,9 @@ export default function SignUp() {
 
   return (
     <div className="min-h-screen bg-white">
+      <Link href="/" className="absolute left-6 top-5 text-sm font-medium text-[#1E4B35] underline-offset-4 hover:underline">
+        &larr; Back to Laker Logs
+      </Link>
       <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 p-6 sm:p-10">
         {/* Branding */}
         <div className="text-center lg:text-left max-w-md space-y-6">

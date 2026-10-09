@@ -77,8 +77,8 @@ export default function RouteGuard({
     !standing;
 
   const redirectTo: string | null = noClass
-    ? pathname !== "/"
-      ? "/"
+    ? pathname !== "/home"
+      ? "/home"
       : null
     : noTeam || noStanding
       ? pathname !== "/profile"

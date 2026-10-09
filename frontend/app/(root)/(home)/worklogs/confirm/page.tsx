@@ -17,7 +17,7 @@ export default function ConfirmPage() {
 
   const mutation = useMutation({
     mutationFn: submitWorkLog,
-    onSuccess: () => router.push("/"),
+    onSuccess: () => router.push("/home"),
     onError: (error) => {
       console.error("SUBMIT FAILED:", error);
     },
